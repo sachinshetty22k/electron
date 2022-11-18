@@ -1,0 +1,65 @@
+diff --git a/chrome/app/resources/chromium_strings_en-GB.xtb b/chrome/app/resources/chromium_strings_en-GB.xtb
+index f654c23d31..858679fa0b 100644
+--- a/chrome/app/resources/chromium_strings_en-GB.xtb
++++ b/chrome/app/resources/chromium_strings_en-GB.xtb
+@@ -146,7 +146,7 @@ Permissions that you've already given to websites and apps may apply to this acc
+ <translation id="4216212958613226427">This language is used to display the Chromium UI</translation>
+ <translation id="4222932583846282852">Cancelling...</translation>
+ <translation id="4230135487732243613">Link my Chromium data to this account</translation>
+-<translation id="4271805377592243930">Get help with Chromium</translation>
++<translation id="4271805377592243930">Get help with Tricon</translation>
+ <translation id="4285930937574705105">Installation failed due to unspecified error. If Google Chrome is currently running, please close it and try again.</translation>
+ <translation id="4304713468139749426">Password Manager</translation>
+ <translation id="4334294535648607276">Download complete.</translation>
+diff --git a/chrome/app/settings_chromium_strings.grdp b/chrome/app/settings_chromium_strings.grdp
+index bbbf89d7d7..a2d103b5aa 100644
+--- a/chrome/app/settings_chromium_strings.grdp
++++ b/chrome/app/settings_chromium_strings.grdp
+@@ -12,7 +12,7 @@
+     About Chromium
+   </message>
+   <message name="IDS_SETTINGS_GET_HELP_USING_CHROME" desc="Text of the button which takes the user to the Chrome help page.">
+-    Get help with Chromium
++    Get help with Tricon
+   </message>
+   <if expr="not chromeos_ash">
+     <message name="IDS_SETTINGS_UPGRADE_UPDATING" desc="Status label: Updating Chromium">
+diff --git a/third_party/blink/public/common/input/web_touch_event.h b/third_party/blink/public/common/input/web_touch_event.h
+index 28d73ecf5c..a8de5805d4 100644
+--- a/third_party/blink/public/common/input/web_touch_event.h
++++ b/third_party/blink/public/common/input/web_touch_event.h
+@@ -17,7 +17,7 @@ class BLINK_COMMON_EXPORT WebTouchEvent : public WebInputEvent {
+  public:
+   // Maximum number of simultaneous touches supported on
+   // Ash/Aura.
+-  enum { kTouchesLengthCap = 16 };
++  enum { kTouchesLengthCap = 32 };
+ 
+   unsigned touches_length = 0;
+   // List of all touches, regardless of state.
+diff --git a/ui/events/gesture_detection/motion_event.h b/ui/events/gesture_detection/motion_event.h
+index d949a2a86a..647f96053c 100644
+--- a/ui/events/gesture_detection/motion_event.h
++++ b/ui/events/gesture_detection/motion_event.h
+@@ -56,7 +56,7 @@ class GESTURE_DETECTION_EXPORT MotionEvent {
+ 
+   // The implementer promises that |GetPointerId()| will never exceed
+   // MAX_POINTER_ID.
+-  enum { MAX_POINTER_ID = 31, MAX_TOUCH_POINT_COUNT = 16 };
++  enum { MAX_POINTER_ID = 32, MAX_TOUCH_POINT_COUNT = 32 };
+ 
+   virtual ~MotionEvent() {}
+ 
+diff --git a/ui/events/gesture_detection/velocity_tracker.cc b/ui/events/gesture_detection/velocity_tracker.cc
+index 1ab883a758..374ff6155e 100644
+--- a/ui/events/gesture_detection/velocity_tracker.cc
++++ b/ui/events/gesture_detection/velocity_tracker.cc
+@@ -36,7 +36,7 @@ class VelocityTrackerStrategy {
+ 
+ namespace {
+ 
+-static_assert(MotionEvent::MAX_POINTER_ID < 32, "max pointer id too large");
++static_assert(MotionEvent::MAX_POINTER_ID < 33, "max pointer id too large");
+ 
+ // Threshold between Action::MOVE events for determining that a pointer has
+ // stopped moving. Some input devices do not send Action::MOVE events in the
